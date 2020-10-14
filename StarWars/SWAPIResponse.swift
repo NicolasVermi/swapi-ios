@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct SWAPIResponse<Data: Codable> {
+    let results: Data
+}
+
+extension SWAPIResponse: Codable {}

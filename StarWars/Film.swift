@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct Film {
+    let title: String
+    let episodeId: Int
+    
+}
+extension Film: Codable {
+    
+}

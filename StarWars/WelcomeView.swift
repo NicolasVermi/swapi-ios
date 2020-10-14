@@ -9,7 +9,23 @@ import SwiftUI
 
 struct WelcomeView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        //Spacer()
+        NavigationView{
+            ZStack {
+                Image("sky")
+                NavigationLink(destination: FilmConteinerView()) {
+                    Text("STAR WARS")
+                        
+                        .foregroundColor(.yellow)
+                        .bold()
+                        .font(.system(size: 50))
+                        .navigationBarTitle("Welcome")
+                    
+                }
+            }
+            .edgesIgnoringSafeArea(.all)
+            
+        }
     }
 }
 
