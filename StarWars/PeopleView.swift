@@ -22,6 +22,7 @@ struct PeopleView: View {
             Image("sky")
                 .edgesIgnoringSafeArea(.all)
             VStack{
+                Text("").padding(.bottom, 50)
                 Text("STAR WARS")
                     .foregroundColor(.yellow)
                     .bold()
@@ -36,23 +37,24 @@ struct PeopleView: View {
                 Spacer()
                 
                 if !isLoading {
-                    ScrollView(.vertical){
-                        ForEach(people, id: \.self) { person in
-                            NavigationLink(destination: DetailsConteinerView(personId: person)) {
-                                Text(person).foregroundColor(.white).font(.system(size: 30))
-                                    .bold()
-                                    .padding(.vertical,15)
+                    VStack {
+                        ScrollView(.vertical){
+                            ForEach(people, id: \.self) { person in
+                                NavigationLink(destination: DetailsConteinerView(personId: person)) {
+                                    Text(person).foregroundColor(.white).font(.system(size: 30))
+                                        .bold()
+                                        .padding(.vertical,15)
+                                }
                             }
-                            
                         }
-
+                        Text("").padding(.bottom,200)
                     }
                 }else{
                     VStack {
                         ProgressView("Loading...")
                             .progressViewStyle(CircularProgressViewStyle(tint: .yellow))
                             .foregroundColor(.white)
-                    }
+                    }.padding(.bottom,100)
                 }
                 
                 Spacer()
@@ -66,7 +68,7 @@ struct PeopleView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                PeopleView(people: ["1","1","1"], isLoading: false)
+                PeopleView(people: ["1","1","1","1","1","1","1","1","1","1","1"], isLoading: false)
             }
             
             NavigationView {

@@ -14,14 +14,15 @@ struct DetailsConteinerView: View {
     }
 
     var body: some View{
-        DetailsView(details: viewModel.details , isLoading: viewModel.isLoading)
-            .onAppear { viewModel.loadDetails() }
+        DetailsView(details: viewModel.details ,planet: viewModel.planet, isLoading: viewModel.isLoading)
+            .onAppear { viewModel.loadDetails()}
         
     }
 }
 
 struct DetailsView: View {
     let details: Details?
+    let planet: Planet?
     let isLoading: Bool
     var body: some View {
         ZStack {
@@ -82,8 +83,14 @@ struct DetailsView: View {
                                         Text(character.gender).foregroundColor(.white).font(.system(size: 30))
                                     }
                                     HStack{
+                                        
                                         Text("Home World: ").foregroundColor(.yellow).font(.system(size: 30))
-                                        Text(character.homeworld).foregroundColor(.white).font(.system(size: 30))
+                                        if let world = planet{
+                                            Text(world.name).foregroundColor(.white).font(.system(size: 30))
+                                        }
+                                        else{
+                                            Text("n/a").foregroundColor(.white).font(.system(size: 30))
+                                        }
                                     }
         //                            HStack{
         //                                Text("Species: ").foregroundColor(.yellow).font(.system(size: 30))
@@ -100,6 +107,7 @@ struct DetailsView: View {
                                 }
                                     
                                 }
+                                Text(" ").padding(.horizontal, 50)
                             }
                         }.padding(.top, 50)
 
@@ -141,12 +149,13 @@ struct DetailsView_Previews: PreviewProvider {
                  birthYear: "String",
                  gender: "String",
                  homeworld: "String"),
+                    planet: Planet(name: "String"),
                     isLoading: false
                 )
             }
             
             NavigationView {
-                DetailsView(details: nil, isLoading: true)
+                DetailsView(details: nil, planet: nil, isLoading: true)
             }
         }
     }

@@ -24,6 +24,7 @@
 		372175E92535FEC800D80504 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372175E82535FEC800D80504 /* People.swift */; };
 		374EF49B2537247F00AC212A /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374EF49A2537247F00AC212A /* Details.swift */; };
 		374EF4A02537288600AC212A /* DetailsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374EF49F2537288600AC212A /* DetailsViewViewModel.swift */; };
+		3753CDE72538493B009D2AAF /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753CDE62538493B009D2AAF /* Planet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		372175E82535FEC800D80504 /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
 		374EF49A2537247F00AC212A /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
 		374EF49F2537288600AC212A /* DetailsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewViewModel.swift; sourceTree = "<group>"; };
+		3753CDE62538493B009D2AAF /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				372175E82535FEC800D80504 /* People.swift */,
 				374EF49A2537247F00AC212A /* Details.swift */,
 				374EF49F2537288600AC212A /* DetailsViewViewModel.swift */,
+				3753CDE62538493B009D2AAF /* Planet.swift */,
 			);
 			path = StarWars;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				372175E92535FEC800D80504 /* People.swift in Sources */,
 				372175CD2535AB7500D80504 /* DetailsView.swift in Sources */,
 				372175E12535FDC100D80504 /* PeopleViewViewModel.swift in Sources */,
+				3753CDE72538493B009D2AAF /* Planet.swift in Sources */,
 				372175D22535DE9000D80504 /* FilmViewViewModel.swift in Sources */,
 				374EF4A02537288600AC212A /* DetailsViewViewModel.swift in Sources */,
 			);
