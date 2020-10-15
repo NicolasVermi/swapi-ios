@@ -8,6 +8,8 @@ import Foundation
 
 struct People {
     let name: String
+    let gender: String
+    let films: [String]
 }
 extension People: Codable {
     

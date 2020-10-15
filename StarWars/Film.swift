@@ -15,3 +15,7 @@ struct Film {
 extension Film: Codable {
     
 }
+
+extension Film: Identifiable {
+    var id: String { "\(episodeId)" }
+}

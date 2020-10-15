@@ -1,20 +1,21 @@
-//
-//  FilmViewViewModel.swift
-//  StarWars
-//
-//  Created by Nicolas on 13/10/2020.
-//
 
 import Combine
 import Foundation
 
-final class FilmViewViewModel: ObservableObject {
-    @Published var films = [Film]()
+final class DetailsViewViewModel: ObservableObject {
+    let personId: String 
+    @Published var details: Details?
     @Published var isLoading = false
+    
+    init(personId: String) {
+        self.personId = personId
+    }
+    
     func handleServerError(_ response:URLResponse?)  {
         isLoading=false
-        films=[]
+        details = nil
     }
+    
     
     func handleSuccess(data: Data){
         self.isLoading = false
@@ -23,28 +24,32 @@ final class FilmViewViewModel: ObservableObject {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         do {
-            let response = try decoder.decode(SWAPIResponse<[Film]>.self, from: data)
-            self.films = response.results
+            let response = try decoder.decode(SWAPIResponse<[Details]>.self, from: data)
+            self.details = response.results
+                .filter { person in return person.name == personId }
+                .first
+            
         } catch {
             self.handleServerError(nil)
         }
     }
     
-    func loadFilms() {
+    
+    func loadDetails() {
         guard !isLoading else { return }
         
-        // caricare la lista di films...
         self.isLoading = true
         let session = URLSession.shared
-        let url = URL(string: "https://swapi.dev/api/films")!
+        let url = URL(string: "https://swapi.dev/api/people")!
         let task = session.dataTask(with: url, completionHandler: { data, response, error in
+            
             print(data)
             print(response)
             print(error)
+            
             if error != nil {
-                // OH NO! An error occurred...
                 print("An error occurred")
-                self.handleServerError(response) //mi da errore
+                self.handleServerError(response)
                 return
             }else{
                 print("tutto bene")
@@ -69,17 +74,7 @@ final class FilmViewViewModel: ObservableObject {
         
        
 
-        
-        /*DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.isLoading = false
-            self.films = [
-                "film2",
-                "film3",
-                "film4",
-                "film5",
-                "film6",
-            ]
-        }*/
+
         
     }
     //

@@ -17,7 +17,7 @@ struct FilmConteinerView: View {
 }
 
 struct FilmView: View {
-    let films: [String]
+    let films: [Film]
     let isLoading: Bool
     var body: some View {
         ZStack {
@@ -25,7 +25,6 @@ struct FilmView: View {
                 .edgesIgnoringSafeArea(.all)
             VStack{
                 //Spacer()
-                
                 Text("STAR WARS")
                     .foregroundColor(.yellow)
                     .bold()
@@ -39,9 +38,9 @@ struct FilmView: View {
                 //Spacer()
                 
                 if !isLoading {
-                    ForEach(films, id: \.self) { film in
-                        NavigationLink(destination: PeopleConteinerView()) {
-                            Text(film).foregroundColor(.white).font(.system(size: 30))
+                    ForEach(films) { film in
+                        NavigationLink(destination: PeopleConteinerView(filmId: "\(film.episodeId)")) {
+                            Text(film.title).foregroundColor(.white).font(.system(size: 30))
                                 .bold()
                                 .padding(.vertical, 15)
                         }
@@ -67,7 +66,14 @@ struct FilmView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                FilmView(films: ["1","1","1"], isLoading: false)
+                FilmView(
+                    films: [
+                        Film(title: "1", episodeId: 1),
+                        Film(title: "2", episodeId: 2),
+                        Film(title: "3", episodeId: 3),
+                    ],
+                    isLoading: false
+                )
             }
             
             NavigationView {

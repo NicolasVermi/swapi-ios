@@ -1,10 +1,14 @@
 import SwiftUI
 
 struct PeopleConteinerView: View {
-    @StateObject var viewModel = PeopleViewViewModel()
+    @StateObject var viewModel: PeopleViewViewModel
+    
+    init(filmId: String) {
+        self._viewModel = StateObject(wrappedValue: PeopleViewViewModel(filmId: filmId))
+    }
 
     var body: some View{
-        PeopleView(people: viewModel.people, isLoading: viewModel.isLoading)
+        PeopleView(people: viewModel.people.map { $0.name }, isLoading: viewModel.isLoading)
             .onAppear { viewModel.loadPeople() }
         
     }
@@ -12,7 +16,7 @@ struct PeopleConteinerView: View {
 
 struct PeopleView: View {
     let people: [String]
-    let isLoading: Bool 
+    let isLoading: Bool
     var body: some View {
         ZStack {
             Image("sky")
@@ -27,24 +31,32 @@ struct PeopleView: View {
                     .bold()
                     .font(.system(size: 25))
                     .navigationBarTitle("Characters list")
+                    .padding(.bottom, 130)
+
                 Spacer()
                 
                 if !isLoading {
-                    ScrollView{
+                    ScrollView(.vertical){
                         ForEach(people, id: \.self) { person in
-                            NavigationLink(destination: DetailsView()) {
-                                Text(person).foregroundColor(.yellow).font(.system(size: 25))
+                            NavigationLink(destination: DetailsConteinerView(personId: person)) {
+                                Text(person).foregroundColor(.white).font(.system(size: 30))
+                                    .bold()
+                                    .padding(.vertical,15)
                             }
+                            
                         }
+
                     }
                 }else{
                     VStack {
                         ProgressView("Loading...")
                             .progressViewStyle(CircularProgressViewStyle(tint: .yellow))
-                            .foregroundColor(.yellow)
+                            .foregroundColor(.white)
                     }
                 }
+                
                 Spacer()
+                
             }
         }
     }

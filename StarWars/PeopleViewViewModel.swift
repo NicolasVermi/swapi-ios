@@ -10,8 +10,14 @@ import Combine
 import Foundation
 
 final class PeopleViewViewModel: ObservableObject {
-    @Published var people = [String]()
+    let filmId: String
+    @Published var people = [People]()
     @Published var isLoading = false
+    
+    init(filmId: String) {
+        self.filmId = filmId
+    }
+    
     func handleServerError(_ response:URLResponse?)  {
         isLoading=false
         people=[]
@@ -26,7 +32,14 @@ final class PeopleViewViewModel: ObservableObject {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         do {
             let response = try decoder.decode(SWAPIResponse<[People]>.self, from: data)
-            self.people = response.results.map { $0.name }
+            self.people = response.results.filter { person in
+                let filmCount = person
+                    .films
+                    .filter { filmTitle in filmTitle.contains(filmId) }
+                    .count
+                return filmCount > 0
+            }
+            
         } catch {
             self.handleServerError(nil)
         }
