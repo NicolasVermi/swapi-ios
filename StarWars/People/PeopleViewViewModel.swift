@@ -10,11 +10,13 @@ import Combine
 import Foundation
 
 final class PeopleViewViewModel: ObservableObject {
+    private let api: SWAPI
     let filmId: String
     @Published var people = [People]()
     @Published var isLoading = false
-    
-    init(filmId: String) {
+
+    init(filmId: String,api: SWAPI = SWApiNetwork()) {
+        self.api = api
         self.filmId = filmId
     }
     
@@ -22,7 +24,6 @@ final class PeopleViewViewModel: ObservableObject {
         isLoading=false
         people=[]
     }
-    
     
     func handleSuccess(data: Data){
         self.isLoading = false
@@ -45,48 +46,23 @@ final class PeopleViewViewModel: ObservableObject {
         }
     }
     
-    
     func loadPeople() {
         guard !isLoading else { return }
-        
         self.isLoading = true
-        let session = URLSession.shared
-        let url = URL(string: "https://swapi.dev/api/people")!
-        let task = session.dataTask(with: url, completionHandler: { data, response, error in
-            
-            print(data)
-            print(response)
-            print(error)
-            
-            if error != nil {
-                print("An error occurred")
-                self.handleServerError(response)
-                return
-            }else{
-                print("tutto bene")
-            }
-            guard
-                let httpResponse = response as? HTTPURLResponse,
-                (200...299).contains(httpResponse.statusCode),
-                let data = data
-            else {
-                self.handleServerError(response)
-                return
-            }
-            DispatchQueue.main.async {
+//        api.loadPeople { [weak self] result in
+        
+        api.load(stringa: "https://swapi.dev/api/people" ) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let data):
                 self.handleSuccess(data: data)
+            case .failure:
+                self.handleServerError(nil)
             }
             
-        })
-        task.resume()
-        
-        
-        
-        
-       
-
-
-        
+        }
     }
+    
+    
     //
 }

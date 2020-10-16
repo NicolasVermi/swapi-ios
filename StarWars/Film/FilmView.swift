@@ -29,13 +29,14 @@ struct FilmView: View {
                     .foregroundColor(.yellow)
                     .bold()
                     .font(.system(size: 50))
+                    .padding(.top, 100)
                 Text("FILM LIST")
                     .foregroundColor(.yellow)
                     .bold()
                     .font(.system(size: 25))
-                    .navigationBarTitle("Film List")
-                    .padding(.bottom, 130)
-                //Spacer()
+                    .navigationBarTitle("Film List", displayMode: .inline)
+                    .padding(.bottom, 110)
+                Spacer()
                 
                 if !isLoading {
                     ForEach(films) { film in
@@ -44,14 +45,16 @@ struct FilmView: View {
                                 .bold()
                                 .padding(.vertical, 15)
                         }
+                        
                     }
+                    Text("").padding(.bottom,200)
                 }
                 else{
                     VStack {
                         ProgressView("Loading...")
                             .progressViewStyle(CircularProgressViewStyle(tint: .yellow))
                             .foregroundColor(.yellow)
-                    }
+                    }.padding(.bottom,100)
                 }
                 
                 Spacer()
@@ -74,6 +77,7 @@ struct FilmView_Previews: PreviewProvider {
                     ],
                     isLoading: false
                 )
+                
             }
             
             NavigationView {

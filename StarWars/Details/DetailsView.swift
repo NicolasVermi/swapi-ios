@@ -28,20 +28,25 @@ struct DetailsView: View {
         ZStack {
             Image("sky").edgesIgnoringSafeArea(.all)
             VStack{
+                
                 Text("STAR WARS")
                     .foregroundColor(.yellow)
                     .bold()
                     .font(.system(size: 50))
+                    .padding(.top, 100)
                 Text("CHARACTER DETAILS")
                     .foregroundColor(.yellow)
                     .bold()
                     .font(.system(size: 25))
-                    .padding(.bottom, 70)
+                    .padding(.bottom, 60)
+                    .navigationBarTitle("Details List", displayMode: .inline)
+                    
+
                 if !isLoading {
                     if let character = details {
                         ScrollView() {
                             HStack() {
-                                Text(" ").padding(.horizontal, 70)
+                                Text("").padding(.horizontal, 70)
                                 VStack(alignment: .leading) {
                                     VStack(alignment: .leading){
                                         HStack(){
@@ -92,10 +97,10 @@ struct DetailsView: View {
                                             Text("n/a").foregroundColor(.white).font(.system(size: 30))
                                         }
                                     }
-        //                            HStack{
-        //                                Text("Species: ").foregroundColor(.yellow).font(.system(size: 30))
-        //                                Text("black").foregroundColor(.white).font(.system(size: 30))
-        //                            }
+//                                    HStack{
+//                                        Text("Species: ").foregroundColor(.yellow).font(.system(size: 30))
+//                                        Text("black").foregroundColor(.white).font(.system(size: 30))
+//                                    }
         //                            HStack{
         //                                Text("Vehicles: ").foregroundColor(.yellow).font(.system(size: 30))
         //                                Text(" ").foregroundColor(.white).font(.system(size: 30))
@@ -140,23 +145,23 @@ struct DetailsView_Previews: PreviewProvider {
                 DetailsView(
                     details:
                         Details(
-                 name: "String",
-                 height: "7",
-                 mass: "7",
-                 hairColor: "String",
-                 skinColor: "String",
-                 eyeColor: "String",
-                 birthYear: "String",
-                 gender: "String",
-                 homeworld: "String"),
+                            name: "Luke Skywalker Luke Skywalker",
+                            height: "7",
+                            mass: "7",
+                            hairColor: "String",
+                            skinColor: "String",
+                            eyeColor: "String",
+                            birthYear: "String",
+                            gender: "String",
+                            homeworld: "String"),
                     planet: Planet(name: "String"),
                     isLoading: false
                 )
             }
             
-            NavigationView {
-                DetailsView(details: nil, planet: nil, isLoading: true)
-            }
+//            NavigationView {
+//                DetailsView(details: nil, planet: nil, isLoading: true)
+//            }
         }
     }
 }

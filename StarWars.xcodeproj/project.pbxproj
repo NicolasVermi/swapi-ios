@@ -24,6 +24,7 @@
 		372175E92535FEC800D80504 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372175E82535FEC800D80504 /* People.swift */; };
 		374EF49B2537247F00AC212A /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374EF49A2537247F00AC212A /* Details.swift */; };
 		374EF4A02537288600AC212A /* DetailsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374EF49F2537288600AC212A /* DetailsViewViewModel.swift */; };
+		3752692025397E9D0036B914 /* SWApiNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3752691F25397E9D0036B914 /* SWApiNetwork.swift */; };
 		3753CDE72538493B009D2AAF /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753CDE62538493B009D2AAF /* Planet.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		372175E82535FEC800D80504 /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
 		374EF49A2537247F00AC212A /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
 		374EF49F2537288600AC212A /* DetailsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewViewModel.swift; sourceTree = "<group>"; };
+		3752691F25397E9D0036B914 /* SWApiNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWApiNetwork.swift; sourceTree = "<group>"; };
 		3753CDE62538493B009D2AAF /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,23 +121,16 @@
 		3721757A25358C5000D80504 /* StarWars */ = {
 			isa = PBXGroup;
 			children = (
-				3721757B25358C5000D80504 /* StarWarsApp.swift */,
-				372175A925358ED700D80504 /* SceneDelegate.swift */,
-				3721757F25358C5100D80504 /* Assets.xcassets */,
 				3721758425358C5100D80504 /* Info.plist */,
-				3721758125358C5100D80504 /* Preview Content */,
+				372175A925358ED700D80504 /* SceneDelegate.swift */,
+				3721757B25358C5000D80504 /* StarWarsApp.swift */,
 				372175AE25358F0100D80504 /* WelcomeView.swift */,
-				372175C12535991600D80504 /* FilmView.swift */,
-				372175D12535DE9000D80504 /* FilmViewViewModel.swift */,
-				372175E02535FDC100D80504 /* PeopleViewViewModel.swift */,
-				372175C72535A92F00D80504 /* PeopleView.swift */,
-				372175CC2535AB7500D80504 /* DetailsView.swift */,
-				372175D62535F49300D80504 /* Film.swift */,
-				372175DB2535F66F00D80504 /* SWAPIResponse.swift */,
-				372175E82535FEC800D80504 /* People.swift */,
-				374EF49A2537247F00AC212A /* Details.swift */,
-				374EF49F2537288600AC212A /* DetailsViewViewModel.swift */,
-				3753CDE62538493B009D2AAF /* Planet.swift */,
+				3721757F25358C5100D80504 /* Assets.xcassets */,
+				3752691225397DD70036B914 /* Details */,
+				3752691025397DA90036B914 /* Film */,
+				3752691625397E0F0036B914 /* Network */,
+				3752691125397DC50036B914 /* People */,
+				3721758125358C5100D80504 /* Preview Content */,
 			);
 			path = StarWars;
 			sourceTree = "<group>";
@@ -164,6 +159,54 @@
 				3721759A25358C5200D80504 /* Info.plist */,
 			);
 			path = StarWarsUITests;
+			sourceTree = "<group>";
+		};
+		3752691025397DA90036B914 /* Film */ = {
+			isa = PBXGroup;
+			children = (
+				372175C12535991600D80504 /* FilmView.swift */,
+				372175D12535DE9000D80504 /* FilmViewViewModel.swift */,
+			);
+			path = Film;
+			sourceTree = "<group>";
+		};
+		3752691125397DC50036B914 /* People */ = {
+			isa = PBXGroup;
+			children = (
+				372175C72535A92F00D80504 /* PeopleView.swift */,
+				372175E02535FDC100D80504 /* PeopleViewViewModel.swift */,
+			);
+			path = People;
+			sourceTree = "<group>";
+		};
+		3752691225397DD70036B914 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				372175CC2535AB7500D80504 /* DetailsView.swift */,
+				374EF49F2537288600AC212A /* DetailsViewViewModel.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		3752691625397E0F0036B914 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				3752691F25397E9D0036B914 /* SWApiNetwork.swift */,
+				3752691725397E160036B914 /* Models */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		3752691725397E160036B914 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				374EF49A2537247F00AC212A /* Details.swift */,
+				372175D62535F49300D80504 /* Film.swift */,
+				372175E82535FEC800D80504 /* People.swift */,
+				3753CDE62538493B009D2AAF /* Planet.swift */,
+				372175DB2535F66F00D80504 /* SWAPIResponse.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,6 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3752692025397E9D0036B914 /* SWApiNetwork.swift in Sources */,
 				372175C22535991600D80504 /* FilmView.swift in Sources */,
 				372175C82535A92F00D80504 /* PeopleView.swift in Sources */,
 				374EF49B2537247F00AC212A /* Details.swift in Sources */,

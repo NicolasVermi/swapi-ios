@@ -10,7 +10,6 @@ struct PeopleConteinerView: View {
     var body: some View{
         PeopleView(people: viewModel.people.map { $0.name }, isLoading: viewModel.isLoading)
             .onAppear { viewModel.loadPeople() }
-        
     }
 }
 
@@ -22,17 +21,20 @@ struct PeopleView: View {
             Image("sky")
                 .edgesIgnoringSafeArea(.all)
             VStack{
-                Text("").padding(.bottom, 50)
+                
                 Text("STAR WARS")
                     .foregroundColor(.yellow)
                     .bold()
                     .font(.system(size: 50))
+                    .padding(.top, 100)
                 Text("CHARACTERS LIST")
                     .foregroundColor(.yellow)
                     .bold()
                     .font(.system(size: 25))
-                    .navigationBarTitle("Characters list")
-                    .padding(.bottom, 130)
+                    .navigationBarTitle("Characters list", displayMode: .inline)
+//                    .navigationBarTitle("Characters list")
+//                    .navigationBarHidden(true)
+                    .padding(.bottom, 110)
 
                 Spacer()
                 
@@ -68,7 +70,7 @@ struct PeopleView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                PeopleView(people: ["1","1","1","1","1","1","1","1","1","1","1"], isLoading: false)
+                PeopleView(people: ["Luke Skywalker","1","1","1","1","1","1","1","1","1","1"], isLoading: false)
             }
             
             NavigationView {

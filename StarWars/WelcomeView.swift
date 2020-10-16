@@ -19,7 +19,9 @@ struct WelcomeView: View {
                         .foregroundColor(.yellow)
                         .bold()
                         .font(.system(size: 50))
-                        .navigationBarTitle("Welcome")
+//                        .navigationBarTitle("Welcome",displayMode: .inline)
+                        .navigationTitle("Welcome")
+                        .padding(.bottom,50)
                     
                 }
             }
