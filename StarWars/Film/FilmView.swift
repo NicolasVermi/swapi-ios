@@ -36,6 +36,7 @@ struct FilmView: View {
                     .font(.system(size: 25))
                     .navigationBarTitle("Film List", displayMode: .inline)
                     .padding(.bottom, 110)
+               
                 Spacer()
                 
                 if !isLoading {
@@ -54,6 +55,7 @@ struct FilmView: View {
                         ProgressView("Loading...")
                             .progressViewStyle(CircularProgressViewStyle(tint: .yellow))
                             .foregroundColor(.yellow)
+                            
                     }.padding(.bottom,100)
                 }
                 
@@ -68,6 +70,7 @@ struct FilmView: View {
 struct FilmView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
+            
             NavigationView {
                 FilmView(
                     films: [

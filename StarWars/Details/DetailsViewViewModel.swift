@@ -24,28 +24,25 @@ final class DetailsViewViewModel: ObservableObject {
     func loadDetails() {
         guard !isLoading else { return }
         self.isLoading = true
-//        api.loadPeople { [weak self] result in
-        api.load(stringa: "https://swapi.dev/api/people") { [weak self] result in
+        api.load(stringa: "https://swapi.dev/api/people") { [weak self] (result: Result<SWAPIResponse<[Details]>, Error>) in
             guard let self = self else { return }
             switch result {
-            case .success(let data):
-                self.handleSuccess(data: data)
+            case .success(let response):
+                self.handleSuccess(response: response)
             case .failure:
                 self.handleServerError(nil)
             }
         }
     }
     
-    
     func loadPlanet(stringa: String) {
         guard !isLoading else { return }
         self.isLoading = true
-//        api.loadPlanet(stringa: stringa) { [weak self] result in
-          api.load(stringa: stringa) { [weak self] result in
+        api.load(stringa: stringa) { [weak self] (result: Result<Planet, Error>) in
             guard let self = self else { return }
             switch result {
-            case .success(let data):
-                self.handleSuccess2(data: data)
+            case .success(let planet):
+                self.handleSuccess(response: planet)
             case .failure:
                 self.handleServerError(nil)
             }
@@ -53,33 +50,18 @@ final class DetailsViewViewModel: ObservableObject {
     }
  
     
-    func handleSuccess(data: Data){
+    func handleSuccess(response: SWAPIResponse<[Details]>){
         self.isLoading = false
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        do {
-            let response = try decoder.decode(SWAPIResponse<[Details]>.self, from: data)
-            self.details = response.results
-                .filter { person in return person.name == personId }
-                .first
+        self.details = response.results
+            .filter { person in return person.name == personId }
+            .first
 
-            loadPlanet(stringa: self.details!.homeworld)
-            
-            
-        } catch {
-            self.handleServerError(nil)
-        }
+        loadPlanet(stringa: self.details!.homeworld)
     }
     
-    func handleSuccess2(data: Data){
+    
+    func handleSuccess(response: Planet){
         self.isLoading = false
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        do {
-            let response = try decoder.decode(Planet.self, from: data)
-            self.planet = response
-        } catch {
-            self.handleServerError(nil)
-        }
+        self.planet = response
     }
 }

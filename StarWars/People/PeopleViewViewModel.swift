@@ -1,11 +1,4 @@
 
-//
-//  FilmViewViewModel.swift
-//  StarWars
-//
-//  Created by Nicolas on 13/10/2020.
-//
-
 import Combine
 import Foundation
 
@@ -25,37 +18,25 @@ final class PeopleViewViewModel: ObservableObject {
         people=[]
     }
     
-    func handleSuccess(data: Data){
+    func handleSuccess(response: SWAPIResponse<[People]>){
         self.isLoading = false
-
-        
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        do {
-            let response = try decoder.decode(SWAPIResponse<[People]>.self, from: data)
-            self.people = response.results.filter { person in
-                let filmCount = person
-                    .films
-                    .filter { filmTitle in filmTitle.contains(filmId) }
-                    .count
-                return filmCount > 0
-            }
-            
-        } catch {
-            self.handleServerError(nil)
+        self.people = response.results.filter { person in
+            let filmCount = person
+                .films
+                .filter { filmTitle in filmTitle.contains(filmId) }
+                .count
+            return filmCount > 0
         }
     }
     
     func loadPeople() {
         guard !isLoading else { return }
-        self.isLoading = true
-//        api.loadPeople { [weak self] result in
-        
-        api.load(stringa: "https://swapi.dev/api/people" ) { [weak self] result in
+        self.isLoading = true        
+        api.load(stringa: "https://swapi.dev/api/people" ) { [weak self] (result: Result<SWAPIResponse<[People]>, Error>) in
             guard let self = self else { return }
             switch result {
-            case .success(let data):
-                self.handleSuccess(data: data)
+            case .success(let response):
+                self.handleSuccess(response: response)
             case .failure:
                 self.handleServerError(nil)
             }
