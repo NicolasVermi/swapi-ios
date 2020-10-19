@@ -24,7 +24,11 @@ final class FilmViewViewModel: ObservableObject {
     func loadFilms() {
         guard !isLoading else { return }
         self.isLoading = true
-        api.load(stringa: "https://swapi.dev/api/films") { [weak self] (result: Result<SWAPIResponse<[Film]>, Error>) in
+        guard let filmsURL = URL(string: "https://swapi.dev/api/films") else {
+            handleServerError(nil)
+            return
+        }
+        api.load(stringa: filmsURL) { [weak self] (result: Result<SWAPIResponse<[Film]>, Error>) in
             guard let self = self else { return }
             switch result {
             case .success(let response):

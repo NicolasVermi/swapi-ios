@@ -2,10 +2,14 @@ import Foundation
 
 final class SWApiNetwork: SWAPI {
     private let decoder: JSONDecoder
+    
+    
     init() {
         self.decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
+    
+    
     
     func parse<Response: Codable>(_ data: Data) -> Result<Response, Error> {
         do {
@@ -16,9 +20,10 @@ final class SWApiNetwork: SWAPI {
         }
     }
     
-    func load<Response: Codable>(stringa: String, completionHanlder: @escaping (Result<Response, Error>) -> Void) {
+    
+    
+    func load<Response: Codable>(stringa url: URL, completionHanlder: @escaping (Result<Response, Error>) -> Void) {
         let session = URLSession.shared
-        let url = URL(string: stringa)!
         let task = session.dataTask(with: url, completionHandler: { [weak self] data, response, error in
             guard let self = self else { return }
             print(data)
@@ -52,5 +57,5 @@ final class SWApiNetwork: SWAPI {
 
 protocol SWAPI {
     
-    func load<Response: Codable>(stringa: String, completionHanlder: @escaping (Result<Response, Error>) -> Void)
+    func load<Response: Codable>(stringa url: URL, completionHanlder: @escaping (Result<Response, Error>) -> Void)
 }

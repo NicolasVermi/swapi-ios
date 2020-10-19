@@ -31,8 +31,13 @@ final class PeopleViewViewModel: ObservableObject {
     
     func loadPeople() {
         guard !isLoading else { return }
-        self.isLoading = true        
-        api.load(stringa: "https://swapi.dev/api/people" ) { [weak self] (result: Result<SWAPIResponse<[People]>, Error>) in
+        self.isLoading = true
+        guard let peopleURL=URL(string: "https://swapi.dev/api/people")else
+        {
+            handleServerError(nil)
+            return
+        }
+        api.load(stringa: peopleURL) { [weak self] (result: Result<SWAPIResponse<[People]>, Error>) in
             guard let self = self else { return }
             switch result {
             case .success(let response):

@@ -24,7 +24,12 @@ final class DetailsViewViewModel: ObservableObject {
     func loadDetails() {
         guard !isLoading else { return }
         self.isLoading = true
-        api.load(stringa: "https://swapi.dev/api/people") { [weak self] (result: Result<SWAPIResponse<[Details]>, Error>) in
+        guard let peopleURL=URL(string: "https://swapi.dev/api/people")else
+        {
+            handleServerError(nil)
+            return
+        }
+        api.load(stringa: peopleURL) { [weak self] (result: Result<SWAPIResponse<[Details]>, Error>) in
             guard let self = self else { return }
             switch result {
             case .success(let response):
@@ -38,7 +43,12 @@ final class DetailsViewViewModel: ObservableObject {
     func loadPlanet(stringa: String) {
         guard !isLoading else { return }
         self.isLoading = true
-        api.load(stringa: stringa) { [weak self] (result: Result<Planet, Error>) in
+        guard let planetURL=URL(string: stringa)else
+        {
+            handleServerError(nil)
+            return
+        }
+        api.load(stringa: planetURL ) { [weak self] (result: Result<Planet, Error>) in
             guard let self = self else { return }
             switch result {
             case .success(let planet):

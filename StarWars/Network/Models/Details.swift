@@ -17,9 +17,7 @@ struct Details {
     let birthYear: String
     let gender: String
     let homeworld: String
-//    let species: String
-    //let vehicles:[String]
-    //let starShips:[String]
+
     
 }
 extension Details: Codable {
